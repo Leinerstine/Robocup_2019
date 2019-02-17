@@ -1,19 +1,13 @@
 #define led LED_BUILTIN
 
-//test
+
 void setup() {
   pinMode(led, OUTPUT);
 }
 
 void loop() {
   digitalWrite(led, HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(led, LOW);
-  delay(2000);
+  delay(100);
 }
-
-//uyoyougd
-
-
-// test2
-
