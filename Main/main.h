@@ -1,2 +1,2 @@
-void setup();
-void loop();
+void setup_led();
+void loop_led();
