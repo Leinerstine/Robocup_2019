@@ -1,8 +1,9 @@
 {
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.errorSquiggles": "Enabled",
-    "arduino.path": "C:\\Program Files (x86)\\Arduino",
+    "arduino.path": "C:/Program Files (x86)/Arduino",
     "arduino.logLevel": "info",
-    "arduino.commandPath": "run-arduino.bat",
+    "arduino.commandPath": "arduino_debug.exe",
     "arduino.enableUSBDetection": true
 }

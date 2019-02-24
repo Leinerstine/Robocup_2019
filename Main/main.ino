@@ -5,12 +5,12 @@ void setup_led();
 
 void setup()
 {
-    setup_led();
+  setup_led();
 }
 
 void loop()
 {
-    loop_led();
+  loop_led();
 }
 
 
