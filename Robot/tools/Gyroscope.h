@@ -38,7 +38,7 @@ class Gyroscope
         fSpeedAngle = 0.f;
       
       float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f); // on fait distance / temps * 1 microsecondes
-      m_z = m_z + fDeltaAngle; 
+      m_z = m_z + fDeltaAngle; //angle actuel 
     }
     
 };
