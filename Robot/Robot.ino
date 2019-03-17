@@ -2,17 +2,17 @@
 #include "MoveMotor.h"
 #include "Gyroscope.h"
 
-Gyroscope g_gyroscope;
+Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
 Robot_Move g_Motor; 
-bool  g_bStop = true;
-Button g_MainButton(2);
+bool  g_bStop = true; //au départ le robot est à l'arrêt
+Button g_MainButton(2); //le bouton pressoir est au port D2
 
-int g_IntCurrentOrder=0;
+int g_IntCurrentOrder=0; //actuellement STAY
 
 
 void setup() 
 {
-  g_Motor.Setup();
+  g_Motor.Setup(); //moteurs
   Serial.begin(9600);
 
 }
