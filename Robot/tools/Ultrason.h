@@ -2,9 +2,17 @@
 #define _ULTRASON_
 #include "librairies\Grove_Ultrasonic_Ranger-master\Ultrasonic.h" 
 
+float m_dist = 0;
+
+float GetDistance
+{
+
+}
+
+/*
 class Ultrason 
 {
-    unsigned long m_distance;
+    long m_distance;
 
     public:
     Ultrason() 
@@ -12,7 +20,7 @@ class Ultrason
         m_distance = 0; //distance
     }
 
-    Ultrasonic.ultrasonic(12);
+    Ultrason.ultrasonic(12);
 
     long GetDistance() const 
     {
@@ -21,9 +29,9 @@ class Ultrason
 
     void Update()
     {
-        delay(100);
         m_distance = ultrasonic.MeasureInCentimeters();
     }
 };
+*/
 
 #endif
