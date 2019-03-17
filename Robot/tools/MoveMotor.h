@@ -2,7 +2,7 @@
 #define _MOVEMOTOR_ 
 
 
-#include "Grove_I2C_Motor_Driver.h"
+#include "librairies\Grove_I2C_Motor_Driver_v1_3-master\Grove_I2C_Motor_Driver.h"
 #define I2C_ADDRESS 0x0f //on définit les deux adresses des Motor Driver 
 #define I2C_TWO 0x0a
 

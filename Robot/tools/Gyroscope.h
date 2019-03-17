@@ -1,6 +1,6 @@
 #ifndef _GYRO_SENSOR_
 #define _GYRO_SENSOR_
-#include "SparkFunLSM6DS3.h"
+#include "\librairies\Accelerometer_And_Gyroscope_LSM6DS3-masterAccelerometer_And_Gyroscope_LSM6DS3-master\SparkFunLSM6DS3.h"
 
 class Gyroscope
 {
