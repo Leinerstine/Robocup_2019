@@ -6,11 +6,11 @@
 class Ultrason 
 {
     long m_distance;
-    Ultrasonic m_us;
     unsigned long m_time;
+    Ultrasonic m_us;
 
     public:
-    Ultrason() : public m_us(12)
+    Ultrason() : m_us(12)
     {
         m_distance = 0; //distance
         m_time = millis();

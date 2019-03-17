@@ -40,8 +40,6 @@ void loop()
     return;
   }
 
-  //g_Motor.ChangeOrder(Robot_Move::LEFT, 0);
-  return;
    
   if (g_Motor.GetOrder() == Robot_Move::STAY)
   {
