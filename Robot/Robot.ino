@@ -1,11 +1,13 @@
-#include "Button.h"
-#include "MoveMotor.h"
-#include "Gyroscope.h"
+#include "tools\Button.h"
+#include "tools\MoveMotor.h"
+#include "tools\Gyroscope.h"
+#include "tools\Ultrason.h"
 
 Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
 Robot_Move g_Motor; 
 bool  g_bStop = true; //au départ le robot est à l'arrêt
 Button g_MainButton(2); //le bouton pressoir est au port D2
+Ultrason g_Ultrason;
 
 int g_IntCurrentOrder=0; //actuellement STAY
 
@@ -23,6 +25,8 @@ void loop()
   g_gyroscope.Update();
   g_Motor.Update(g_gyroscope.GetRawAngle());
   g_MainButton.Update(); 
+  g_Ultrason.Update();
+  Serial.print(g_Ultrason.GetDistance());
 
 
   if (g_MainButton.IsPressed())
@@ -36,8 +40,8 @@ void loop()
     return;
   }
 
-   //g_Motor.ChangeOrder(Robot_Move::LEFT, 0);
-   //return;
+  //g_Motor.ChangeOrder(Robot_Move::LEFT, 0);
+  return;
    
   if (g_Motor.GetOrder() == Robot_Move::STAY)
   {
