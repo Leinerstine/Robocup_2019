@@ -30,13 +30,13 @@ class Gyroscope
     {
       unsigned long newTime = micros();
       float fDeltaTimeMicros = (newTime - m_time); //différence de temps
-     // if (fDeltaTimeMicros < 1000.f)
-       // return; // n update pas trop souvent
+      if (fDeltaTimeMicros < 1000.f)
+        return; // n update pas trop souvent
       m_time = newTime;
 
       float fSpeedAngle = myIMU.readFloatGyroZ();
-      //if (fabs(fSpeedAngle)<0.5f)
-        //fSpeedAngle = 0.f;
+      if (fabs(fSpeedAngle)<0.5f)
+        fSpeedAngle = 0.f;
       
       float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f);
       m_z = m_z + fDeltaAngle;
