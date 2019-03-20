@@ -1,6 +1,6 @@
-#include "tools\Button.h"
-#include "tools\MoveMotor.h"
-#include "tools\Gyroscope.h"
+#include "Button.h"
+#include "MoveMotor.h"
+#include "Gyroscope.h"
 
 Gyroscope g_gyroscope;
 Robot_Move g_Motor; 
