@@ -35,8 +35,8 @@ class Gyroscope
       m_time = newTime;
 
       float fSpeedAngle = myIMU.readFloatGyroZ();
-      if (fabs(fSpeedAngle)<0.5f)
-        fSpeedAngle = 0.f;
+      //if (fabs(fSpeedAngle)<0.5f)
+        //fSpeedAngle = 0.f;
       
       float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f);
       m_z = m_z + fDeltaAngle;
