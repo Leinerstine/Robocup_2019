@@ -45,7 +45,7 @@ void loop()
     if (g_IntCurrentOrder==0) //compteur ordre actuel
       g_Motor.ChangeOrder(Robot_Move::FORWARD, 2000, 0); //avance 2 secondes puis repasse en STAY
     else if (g_IntCurrentOrder==1)
-      g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 90); //angle 90
+      g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 85); //angle 90
       
     
     g_IntCurrentOrder++;

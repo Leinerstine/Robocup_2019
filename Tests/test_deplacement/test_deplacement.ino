@@ -1,12 +1,11 @@
-#include "Button.h"
 #include "MoveMotor.h"
-#include "Gyroscope.h"
+#include "Ultrason.h"
 
-Gyroscope g_gyroscope;
 Robot_Move g_Motor; 
 
+//variable et pointeur stockant la demande de mouvement
 int needMove = 1;
-int *PneedMove = &needmove;
+int *PneedMove = &needMove;
 
 void setup() 
 {
@@ -16,10 +15,6 @@ void setup()
 
 void loop()
 {
-    g_gyroscope.Update();
-    g_Motor.Update(g_gyroscope.GetRawAngle());
-    g_MainButton.Update();
-
     if (*PneedMove = 1) {
         *PneedMove = 0;
         mfw_analyze(PneedMove)
@@ -34,9 +29,9 @@ void loop()
 
 void mfw_analyze(int *needMove)
 {
-    int i = 0;
+    int i = 0; //variable de boucle
 
-    int r_distance, bw_distance, l_distance, fw_distance = 0;
+    int r_distance, bw_distance, l_distance, fw_distance = 0; //variable stockant la distance entre le mur et le robot
     
     //AVANCE
     g_Motor.ChangeOrder(Robot_Move::FORWARD, 3000, 0); //avancer 3s
@@ -49,26 +44,26 @@ void mfw_analyze(int *needMove)
         //analyse la distance 
         switch (i)
         {
-            case : 0
-                *r = //distance
+            case 0 :
+                r = GetDistance();
                 break;
-            case : 1
-                *bw_distance = //distance
+            case 1 :
+                bw_distance = GetDistance();
                 break;
-            case : 2
-                *l_distance = //distance
+            case 2 :
+                l_distance = GetDistance();
                 break;
-            case : 3
-                *fw_distance = //distance 
+            case 3 :
+                fw_distance = GetDistance(); 
         }
         
         //analyse infrarouge + distribution medikit
     }
 
     //CHOISIS LA FUTURE DIRECTION 
-    if (*r < 10) {
-        if (*fw < 10) {
-            if (*l < 10) {
+    if (r_distance < 10) {
+        if (fw_distance < 10) {
+            if (l_distance < 10) {
                 g_Motor.ChangeOrder(Robot_Move::LEFT, 0, 180); //tourner 90°
                 *PneedMove = 1;
             }
