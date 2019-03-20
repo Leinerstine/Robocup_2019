@@ -27,12 +27,12 @@ class Temperature
         light.setRGB(R, G, B); //initialisation couleur
     }
 
-    void GetTemperature()
+    float GetTemperature()
     {
         return m_temp;
     }
 
-    float PrintMessage()
+    void Update()
     {
         float volts = analogRead(_ANALOG_THERMIC); //on obtient la température en volts
         float New_Temp = 20.f - (volts - 25.f)*2.f; //on convertit moyennement en degrés
