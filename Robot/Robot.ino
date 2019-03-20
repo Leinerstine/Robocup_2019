@@ -17,7 +17,7 @@ int g_IntCurrentOrder=0; //actuellement STAY
 void setup() 
 {
   g_Motor.Setup(); //moteurs
-  /g_Temp.Setup();
+  //g_Temp.Setup();
   Serial.begin(9600);
 
 }
