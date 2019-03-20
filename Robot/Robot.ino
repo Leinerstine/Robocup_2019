@@ -9,7 +9,7 @@ Robot_Move g_Motor;
 bool  g_bStop = true; //au départ le robot est à l'arrêt
 Button g_MainButton(2); //le bouton pressoir est au port D2
 Ultrason g_Ultrason;
-Temperature g_Temp;
+//Temperature g_Temp;
 
 int g_IntCurrentOrder=0; //actuellement STAY
 
