@@ -9,7 +9,7 @@ class Temperature
 {
     rgb_lcd         light; //création capteur
     float           m_temp; //température 
-    const int R =   255; //valeurs couleurs
+    const int R =   0; //valeurs couleurs
     const int G =   0;
     const int B =   0;
     bool            m_difference; //verifier si trop grande difference
@@ -23,7 +23,7 @@ class Temperature
 
     void Setup()
     {
-        light.begin(16,2); //initialisation capteur
+        light.begin(16,2); //initialisation capteur colonne ligne 
         light.setRGB(R, G, B); //initialisation couleur
     }
 
@@ -41,7 +41,7 @@ class Temperature
             m_difference = true;
         
         if(m_difference)
-            light.setRGB(255,165,0); //on change la couleur background
+            light.setRGB(255,0,0); //on change la couleur background
             light.setCursor(0,1); //où afficher texte
             light.print("VICTIM FOUND");
 
