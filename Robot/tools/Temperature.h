@@ -3,13 +3,13 @@
 
 #include <math.h>
 #include "rgb_lcd.h"
-#define _ANALOG_THERMIC 
+#define _ANALOG_THERMIC //à mettre l'adresse du capteur
 
 class Temperature
 {
-    rgb_lcd         light;
+    rgb_lcd         light; //création capteur
     float           m_temp; //température 
-    const int R =   255;
+    const int R =   255; //valeurs couleurs
     const int G =   0;
     const int B =   0;
     bool            difference; //verifier si trop grande difference
@@ -18,26 +18,29 @@ class Temperature
     Temperature() g_Temp;
     {
         m_temp = 0; //initialisation température
-        difference = false;
+        difference = false; //de base il n'y a pas de différence de température
     }
 
     void setup()
     {
-        light.begin(18,1); //colonnes, lignes
-        light.setRGB(R, G, B);
+        light.begin(16,2); //initialisation capteur
+        light.setRGB(R, G, B); //initialisation couleur
     }
 
     float PrintMessage()
     {
-        float volts = analogRead(_ANALOG_THERMIC);
-        float m_temp = 20.f - (volts - 25.f)*2.f;
-        float New_Temp = m_temp;
+        float volts = analogRead(_ANALOG_THERMIC); //on obtient la température en volts
+        float New_Temp = 20.f - (volts - 25.f)*2.f; //on convertit moyennement en degrés
 
-        if (New Temp - m_temp > 5)
+        if (New Temp - m_temp > 5) //difference température 5 degrés
             m_difference = true;
         
         if(m_difference)
+            light.setRGB(255,165,0); //on change la couleur background
+            light.setCursor(0,1); //où afficher texte
             light.print("VICTIM FOUND");
+
+        float New_Temp = m_temp;
 
         delay(100);
     }
