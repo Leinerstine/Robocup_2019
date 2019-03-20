@@ -2,12 +2,14 @@
 #include "tools\MoveMotor.h"
 #include "tools\Gyroscope.h"
 #include "tools\Ultrason.h"
+//#include "tools\Temperature.h"
 
 Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
 Robot_Move g_Motor; 
 bool  g_bStop = true; //au départ le robot est à l'arrêt
 Button g_MainButton(2); //le bouton pressoir est au port D2
 Ultrason g_Ultrason;
+Temperature g_Temp;
 
 int g_IntCurrentOrder=0; //actuellement STAY
 
@@ -15,6 +17,7 @@ int g_IntCurrentOrder=0; //actuellement STAY
 void setup() 
 {
   g_Motor.Setup(); //moteurs
+  /g_Temp.Setup();
   Serial.begin(9600);
 
 }
@@ -27,7 +30,8 @@ void loop()
   g_MainButton.Update(); 
   g_Ultrason.Update();
   Serial.print(g_Ultrason.GetDistance());
-
+  //g_Temp.Update();
+  //Serial.print(g_Temp.GetTemperature());
 
   if (g_MainButton.IsPressed())
     g_bStop = !g_bStop;

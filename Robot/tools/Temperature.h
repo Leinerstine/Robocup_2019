@@ -21,10 +21,15 @@ class Temperature
         difference = false; //de base il n'y a pas de différence de température
     }
 
-    void setup()
+    void Setup()
     {
         light.begin(16,2); //initialisation capteur
         light.setRGB(R, G, B); //initialisation couleur
+    }
+
+    void GetTemperature()
+    {
+        return m_temp;
     }
 
     float PrintMessage()
@@ -40,7 +45,7 @@ class Temperature
             light.setCursor(0,1); //où afficher texte
             light.print("VICTIM FOUND");
 
-        float New_Temp = m_temp;
+        float New_Temp = m_temp; //à la fin de chaque boucle : on modifie la valeur afin de pouvoir comparer avec la dernière valeur 
 
         delay(100);
     }
