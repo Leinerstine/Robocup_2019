@@ -10,7 +10,7 @@ class Ultrason
     Ultrasonic m_us; //variable créée via Ultrasonic.h 
 
     public:
-    Ultrason() : m_us(12)
+    Ultrason() : m_us(4)
     {
         m_distance = 0; //distance
         m_time = millis(); // on update le temps de base
