@@ -3,7 +3,7 @@
 
 #include <math.h>
 #include "rgb_lcd.h"
-#define _ANALOG_THERMIC 0//à mettre l'adresse du capteur
+#define _ANALOG_THERMIC 14//à mettre l'adresse du capteur
 
 class Temperature
 {
