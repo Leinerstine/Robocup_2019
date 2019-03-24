@@ -52,13 +52,13 @@ class Temperature
             m_fCurrentTemp = New_Temp;
         }
 
-        if (New_Temp - m_fMinTemp > 5.f) //difference température 5 degrés
+        if (New_Temp - m_fMinTemp > 1.f) //difference température 5 degrés
         {
            if (m_EndDisplayTime == 0) //pas d'affichage
            {
+                light.clear();
                 m_EndDisplayTime = millis() + 5000; //temps actuel + 5 secondes (on coupe dans 5sec)
-                light.setRGB(255,G,B); //on change la couleur background
-                light.setCursor(0,1); //où afficher texte
+                light.setRGB(R,255,B); //on change la couleur background
                 light.print("VICTIM FOUND");
            }
         }
@@ -68,7 +68,7 @@ class Temperature
         {
             if (m_EndDisplayTime < millis())
             {
-                light.noDisplay();
+                light.clear();
                 m_EndDisplayTime = 0;
             }
         }
@@ -80,12 +80,16 @@ class Temperature
 
     void    StopDebug()
     {
+        if(m_EndDisplayTime != 0) //si on affiche
+            return;
         light.clear();
         light.setRGB(R,G,B);
     }
 
     void    DrawDebug(const char *_txt)
     {
+        if(m_EndDisplayTime != 0) //si on affiche
+           return;
         light.setRGB(255,G,B); //on change la couleur background
         light.setCursor(0,1); //où afficher texte
         light.print(_txt);
