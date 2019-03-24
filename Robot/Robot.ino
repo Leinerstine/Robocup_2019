@@ -7,7 +7,7 @@
 Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
 Robot_Move g_Motor; 
 bool  g_bStop = true; //au départ le robot est à l'arrêt
-Button g_MainButton(2); //le bouton pressoir est au port D2
+Button g_MainButton(8); //le bouton pressoir est au port D2
 Ultrason g_Ultrason;
 Temperature g_Temp;
 
