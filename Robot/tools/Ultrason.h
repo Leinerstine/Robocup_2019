@@ -30,6 +30,7 @@ class Ultrason
         m_distance = m_us.MeasureInCentimeters(); //distance en centimetres
         m_time = NewTime; //on update le temps quand on a pris la mesure 
     }
+
 };
 
 

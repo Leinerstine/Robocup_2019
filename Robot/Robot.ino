@@ -5,6 +5,7 @@
 #include "tools\Temperature.h"
 
 Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
+bool g_bDebugMode = true;
 Robot_Move g_Motor; 
 bool  g_bStop = true; //au départ le robot est à l'arrêt
 Button g_MainButton(8); //le bouton pressoir est au port D2
@@ -18,6 +19,7 @@ void setup()
 {
   g_Motor.Setup(); //moteurs
   g_Temp.Setup();
+  g_gyroscope.Setup();
   Serial.begin(9600);
 
 }
@@ -29,11 +31,45 @@ void loop()
   g_Motor.Update(g_gyroscope.GetRawAngle());
   g_MainButton.Update(); 
   g_Ultrason.Update();
-  Serial.print(g_Ultrason.GetDistance());
+  //Serial.print(g_Ultrason.GetDistance());
   g_Temp.Update();
-  Serial.print(g_Temp.GetTemperature());
+  //Serial.print(g_Temp.GetTemperature());
+  //Serial.println(g_MainButton.IsLongReleased());
 
-  if (g_MainButton.IsPressed())
+
+  // debug mode on off
+ if (g_MainButton.IsLongReleased())
+ {
+    if (g_bDebugMode)
+    {
+      g_bDebugMode = false;
+      g_Temp.StopDebug();
+    }
+    else
+    {
+      g_bDebugMode = true;
+    }
+ }
+ if (g_bDebugMode)
+ {
+    char txt1[256];
+    char txt2[256];
+    char txt3[256];
+    long t = g_Temp.GetTemperature();
+    long d = g_Ultrason.GetDistance();
+    long a = g_gyroscope.GetRawAngle();
+
+    Serial.println(a);
+    sprintf(txt1, "T %d",t);// D %d A %d", t, d, a);
+    sprintf(txt2, " D %d",d);// D %d A %d", t, d, a);
+    sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
+    strcat(txt1, txt2);
+    strcat(txt1, txt3);
+    g_Temp.DrawDebug(txt1);
+ }
+
+
+  if (g_MainButton.IsShortReleased())
     g_bStop = !g_bStop;
 
   if(g_bStop)
