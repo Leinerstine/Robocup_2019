@@ -4,12 +4,14 @@
 #include "Button.h"
 #include "Temperature.h"
 
+#define DELTA_TIME 5000
+
+void mfw_analyze(int *PneedMove);
 
 //initialise les differents elements
 Gyroscope g_Gyroscope;
 Robot_Move g_Motor; 
 Ultrason g_Ultrason;
-Button g_MainButton(2);
 Button g_MainButton(8);
 Temperature g_Temp;
 
