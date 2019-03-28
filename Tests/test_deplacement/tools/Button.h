@@ -9,6 +9,8 @@ class Button
   bool m_bWasDownLastFrame; //était appuyé avant
   bool m_bIsReleasedThisFrame; //vient d'être relâché
   bool m_bIsPressedThisFrame; //appuyé
+  long m_DownStartTime;
+  long m_FullPressedTime;
 
   public:
   Button(int _pin) //initialisation 
@@ -17,15 +19,25 @@ class Button
     m_bWasDownLastFrame = false;
     m_bIsPressedThisFrame = false; 
     m_bIsReleasedThisFrame = false;
+    m_DownStartTime = 0;
+    m_FullPressedTime = 0;
   }
 
   bool IsPressed() const //si c'est appuyé renvoie que ça l'était
   {
     return m_bIsPressedThisFrame;
   }
-  bool IsReleased() const //si c'est relâché renvoie que ça l'était
+  bool IsShortReleased() const //si c'est relâché renvoie que ça l'était
   {
-    return m_bIsReleasedThisFrame;
+    if (m_FullPressedTime < 500)
+      return m_bIsReleasedThisFrame;
+    return false;
+  }
+  bool IsLongReleased() const //si c'est relâché renvoie que ça l'était
+  {
+    if (m_FullPressedTime >= 500)
+      return m_bIsReleasedThisFrame;
+    return false;
   }
 
   void Update()
@@ -37,14 +49,20 @@ class Button
     if (b==1) //1 = appuyé 
     {
       if (!m_bWasDownLastFrame) //s'il n'était pas appuyé avant
+      {
+        m_DownStartTime = millis();
         m_bIsPressedThisFrame = true; //maintenant appuyé
+      }
       
       m_bWasDownLastFrame = true; //on modifie pour la prochaine boucle 
     }
     else
     {
       if (m_bWasDownLastFrame) //déjà appuyé
+      {
         m_bIsReleasedThisFrame = true; //maintenant relâché
+        m_FullPressedTime = millis() - m_DownStartTime;
+      }
 
        m_bWasDownLastFrame = false; 
     }

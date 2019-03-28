@@ -4,39 +4,39 @@
 
 class Gyroscope
 {
-    LSM6DS3 myIMU;
-    float m_z;
-    unsigned long m_time; 
+    LSM6DS3 myIMU; //création du capteur 
+    float m_z; //orientation (sur l'axe z, quand le robot est au sol)
+    unsigned long m_time; //temps
 
     public:
-    Gyroscope() : myIMU(I2C_MODE, 0x6A)
+    Gyroscope() : myIMU(I2C_MODE, 0x6A) //paramètres par défaut, adresse du capteur
     {
-        m_z = 0;
-        m_time = micros();
+        m_z = 0; //initialisation de départ pour l'orientation
+        m_time = micros(); //temps en microsecondes (millisecondes pas assez précis)
     }
 
     float   GetRawAngle() const
     {
-      return m_z;
+      return m_z; //on retourne l'angle
     }
 
-    void setup()
+    void Setup()
     {
-      myIMU.begin();
+      myIMU.begin(); //nécessaire pour commencer
       
     }
 
     void    Update()
     {
       unsigned long newTime = micros();
-      float fDeltaTimeMicros = (newTime - m_time);
-     // if (fDeltaTimeMicros < 1000.f)
-       // return; // n update pas trop souvent
+      float fDeltaTimeMicros = (newTime - m_time); //différence de temps
+      if (fDeltaTimeMicros < 1000.f)
+        return; // n update pas trop souvent
       m_time = newTime;
 
       float fSpeedAngle = myIMU.readFloatGyroZ();
-      //if (fabs(fSpeedAngle)<0.5f)
-        //fSpeedAngle = 0.f;
+      if (fabs(fSpeedAngle)<5.f)
+        fSpeedAngle = 0.f;
       
       float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f);
       m_z = m_z + fDeltaAngle;

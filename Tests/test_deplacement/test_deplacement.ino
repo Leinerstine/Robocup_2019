@@ -123,5 +123,4 @@ void mfw_analyze(int *PneedMove)
         delay(5000);
         *PneedMove = 1;
     }
-    
 }
