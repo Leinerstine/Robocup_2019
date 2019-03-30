@@ -1,3 +1,4 @@
+#include "Button.h"                                                                   
 #include "MoveMotor.h"
 #include "Gyroscope.h"
 #include "Ultrason.h"
@@ -78,8 +79,9 @@ void loop()
     }
     else
     {
-        if (*PneedMove = 1) {
+        if (*PneedMove == 1) {
         *PneedMove = 0;
+        Serial.print("mfwanalyze\n");
         mfw_analyze(PneedMove);
         }   
     }
@@ -92,22 +94,35 @@ void mfw_analyze(int *PneedMove)
     int r_distance, bw_distance, l_distance, fw_distance = 0; //variable stockant la distance entre le mur et le robot
     
     //AVANCE
+    g_Gyroscope.Update();
+    g_Motor.Update(g_Gyroscope.GetRawAngle());
+    
+    Time = millis() + DELTA_TIME;
+    
     g_Motor.ChangeOrder(Robot_Move::FORWARD, 3000, 0); //avancer 3s
     Serial.print("avance\n");
-    //delay(5000);
-    if(Time > millis())
-      return;
+
+    g_Gyroscope.Update();
+    g_Motor.Update(g_Gyroscope.GetRawAngle());
+    
+    while(Time > millis());
     Time = millis() + DELTA_TIME;
     
     //ANALYSE AUTOUR DE LUI
     for(i = 0; i<4; i++)
     {
-        g_Motor.ChangeOrder(Robot_Move::RIGHT, 0, 90); //tourner 90°
+        g_Gyroscope.Update();
+        g_Motor.Update(g_Gyroscope.GetRawAngle());
+        
+        g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
-        //delay(5000);
-        if(Time > millis())
-          return;
+
+        g_Gyroscope.Update();
+        g_Motor.Update(g_Gyroscope.GetRawAngle());
+        
+        while(Time > millis());
         Time = millis() + DELTA_TIME;
+        
         g_Ultrason.Update();
         //analyse la distance 
         switch (i)
@@ -137,29 +152,39 @@ void mfw_analyze(int *PneedMove)
                 Serial.print("\n");
                 break;
         }
-        
-        //analyse infrarouge + distribution medikit
     }
 
     //CHOISIS LA FUTURE DIRECTION 
     if (r_distance < 10) {
         if (fw_distance < 10) {
             if (l_distance < 10) {
-                g_Motor.ChangeOrder(Robot_Move::LEFT, 0, 180); //tourner 90°
+                g_Gyroscope.Update();
+                g_Motor.Update(g_Gyroscope.GetRawAngle());
+                
+                g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 180); //tourner 90°
                 Serial.print("demi-tour\n");
-                //delay(5000);
-                if(Time > millis())
-                  return;
+
+                g_Gyroscope.Update();
+                g_Motor.Update(g_Gyroscope.GetRawAngle());
+                
+                while(Time > millis());
                 Time = millis() + DELTA_TIME;
+                
                 *PneedMove = 1;
             }
             else {
-                g_Motor.ChangeOrder(Robot_Move::LEFT, 0, 90); //tourner 90°
+                g_Gyroscope.Update();
+                g_Motor.Update(g_Gyroscope.GetRawAngle());
+                
+                g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 90); //tourner 90°
                 Serial.print("gauche\n");
-                //delay(5000);
-                if(Time > millis())
-                  return;
+
+                g_Gyroscope.Update();
+                g_Motor.Update(g_Gyroscope.GetRawAngle());
+                
+                while(Time > millis());
                 Time = millis() + DELTA_TIME;
+                
                 *PneedMove = 1;
             }
             
@@ -171,13 +196,18 @@ void mfw_analyze(int *PneedMove)
     }
     
     else {
-        g_Motor.ChangeOrder(Robot_Move::RIGHT, 0, 90); //tourner 90°
+        g_Gyroscope.Update();
+        g_Motor.Update(g_Gyroscope.GetRawAngle());
+        
+        g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
-        //delay(5000);
-        if(Time > millis())
-          return;
+
+        g_Gyroscope.Update();
+        g_Motor.Update(g_Gyroscope.GetRawAngle());
+        
+        while(Time > millis());
         Time = millis() + DELTA_TIME;
+        
         *PneedMove = 1;
     }
-    
 }
