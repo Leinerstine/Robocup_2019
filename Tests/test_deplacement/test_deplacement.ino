@@ -68,7 +68,7 @@ void loop()
   }
 
 
-    if (g_MainButton.IsShortReleased()) {
+    if (g_MainButton.IsPressed()) {
         g_bStop = !g_bStop;
     }
 
