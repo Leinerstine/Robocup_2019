@@ -8,6 +8,7 @@
 #define UPDATE() g_Gyroscope.Update();\
                g_Motor.Update(g_Gyroscope.GetRawAngle());\
                g_MainButton.Update();\
+               ecran();
                if (g_MainButton.IsPressed()) {\
                    *PneedMove = 0;\
                    Serial.print("stop");\
@@ -82,9 +83,9 @@ void loop()
         *PneedMove = 0;
         Serial.print("mfwanalyze\n");
         mfw_analyze(PneedMove);
-        }   
+        }
     }
-} 
+}
 
 void mfw_analyze(int *PneedMove)
 {
@@ -199,4 +200,25 @@ void mfw_analyze(int *PneedMove)
         
         *PneedMove = 1;
     }
+}
+
+void ecran()
+{
+    g_Ultrason.Update();
+    g_Temp.Update();
+    g_Gyroscope.Update();
+
+    char txt1[256];
+    char txt2[256];
+    char txt3[256];
+    long t = g_Temp.GetTemperature();
+    long d = g_Ultrason.GetDistance();
+    long a = g_Gyroscope.GetRawAngle();
+
+    sprintf(txt1, "T %d",t);// D %d A %d", t, d, a);
+    sprintf(txt2, " D %d",d);// D %d A %d", t, d, a);
+    sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
+    strcat(txt1, txt2);
+    strcat(txt1, txt3);
+    g_Temp.DrawDebug(txt1);    
 }
