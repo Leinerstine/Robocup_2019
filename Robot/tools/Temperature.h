@@ -78,7 +78,7 @@ class Temperature
         m_fCurrentTemp = New_Temp; //à la fin de chaque boucle : on modifie la valeur afin de pouvoir comparer avec la dernière valeur 
     }
 
-    void    DrawDebug(const char *_txt)
+    void  DrawDebug(const char *_txt)
     {
         if(m_EndDisplayTime != 0) //si on affiche
            return;

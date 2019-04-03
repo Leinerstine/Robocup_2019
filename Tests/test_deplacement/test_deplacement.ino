@@ -39,7 +39,7 @@ void loop()
     g_MainButton.Update();
     g_Ultrason.Update();
     g_Temp.Update();
-    
+
   if (g_bDebugMode)
   {
       char txt1[256];
@@ -180,7 +180,6 @@ void mfw_analyze(int *PneedMove)
         else {
             *PneedMove = 1;
         }
-        
     }
     
     else {
