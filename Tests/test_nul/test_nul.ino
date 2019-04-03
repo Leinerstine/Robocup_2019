@@ -69,7 +69,7 @@ void loop()
     
     Serial.print("Je démarre.\n");
 
-    if(Time < NewTime + DELTA_TIME)
+    if(Time < NewTime + DELTA_TIME && g_Motor._fDeltaAngle < 85)
     {
       switch(g_CurrentOrder)
       {
@@ -86,7 +86,9 @@ void loop()
     }
     else 
     {
-      g_CurrentOrder = 0;
+      g_CurrentOrder ++;
+      if (g_CurrentOrder == 5)
+        g_CurrentOrder = 0;
       Time = NewTime;
     }
 } 
