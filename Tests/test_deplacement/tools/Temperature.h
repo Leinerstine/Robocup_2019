@@ -15,8 +15,8 @@ class Temperature
     const int G =   0;
     const int B =   0;
     long            m_EndDisplayTime; //temps où éteindre l'affichage
-    long            m_TimeToUpdate;
-    int             m_victim; 
+    long            m_TimeToUpdate; 
+    int             m_victim;
 
     public:
     Temperature()
@@ -68,6 +68,7 @@ class Temperature
                 m_EndDisplayTime = millis() + 5000; //temps actuel + 5 secondes (on coupe dans 5sec)
                 light.setRGB(R,255,B); //on change la couleur background
                 light.print("VICTIM FOUND");
+                m_victim = 1;
            }
         }
  
@@ -79,6 +80,7 @@ class Temperature
                 m_victim = 0;
                 light.clear(); //plus de texte
                 m_EndDisplayTime = 0;
+                m_victim = 0;
             }
         }
 
