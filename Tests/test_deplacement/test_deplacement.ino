@@ -78,7 +78,8 @@ void loop()
     }
     else
     {
-        if (*PneedMove == 1) {
+        if (
+            *PneedMove == 1) {
         *PneedMove = 0;
         Serial.print("mfwanalyze\n");
         mfw_analyze(PneedMove);
