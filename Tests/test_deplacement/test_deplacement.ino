@@ -5,7 +5,7 @@
 #include "Button.h"
 #include "Temperature.h"
 
-#define UPDATE g_Gyroscope.Update();\
+#define UPDATE() g_Gyroscope.Update();\
                g_Motor.Update(g_Gyroscope.GetRawAngle());\
                g_MainButton.Update();\
                if (g_MainButton.IsShortReleased()) {\
