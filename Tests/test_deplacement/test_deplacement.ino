@@ -94,7 +94,7 @@ void mfw_analyze(int *PneedMove)
     //AVANCE
     //g_Gyroscope.Update();
     //g_Motor.Update(g_Gyroscope.GetRawAngle());
-    UPDATE
+    UPDATE()
     
     Time = millis() + DELTA_TIME;
     
@@ -103,7 +103,7 @@ void mfw_analyze(int *PneedMove)
 
     //g_Gyroscope.Update();
     //g_Motor.Update(g_Gyroscope.GetRawAngle());
-    UPDATE
+    UPDATE()
 
     while(Time > millis());
     Time = millis() + DELTA_TIME;
@@ -113,14 +113,14 @@ void mfw_analyze(int *PneedMove)
     {
         //g_Gyroscope.Update();
         //g_Motor.Update(g_Gyroscope.GetRawAngle());
-        UPDATE
+        UPDATE()
 
         g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
 
         //g_Gyroscope.Update();
         //g_Motor.Update(g_Gyroscope.GetRawAngle());
-        UPDATE
+        UPDATE()
 
         while(Time > millis());
         Time = millis() + DELTA_TIME;
@@ -162,14 +162,14 @@ void mfw_analyze(int *PneedMove)
             if (l_distance < 10) {
                 //g_Gyroscope.Update();
                 //g_Motor.Update(g_Gyroscope.GetRawAngle());
-                UPDATE
+                UPDATE()
 
                 g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 180); //tourner 90°
                 Serial.print("demi-tour\n");
 
                 //g_Gyroscope.Update();
                 //g_Motor.Update(g_Gyroscope.GetRawAngle());
-                UPDATE
+                UPDATE()
 
                 while(Time > millis());
                 Time = millis() + DELTA_TIME;
@@ -179,14 +179,14 @@ void mfw_analyze(int *PneedMove)
             else {
                 //g_Gyroscope.Update();
                 //g_Motor.Update(g_Gyroscope.GetRawAngle());
-                UPDATE
+                UPDATE()
 
                 g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 90); //tourner 90°
                 Serial.print("gauche\n");
 
                 //g_Gyroscope.Update();
                 //g_Motor.Update(g_Gyroscope.GetRawAngle());
-                UPDATE
+                UPDATE()
 
                 while(Time > millis());
                 Time = millis() + DELTA_TIME;
@@ -203,14 +203,14 @@ void mfw_analyze(int *PneedMove)
     else {
         //g_Gyroscope.Update();
         //g_Motor.Update(g_Gyroscope.GetRawAngle());
-        UPDATE
+        UPDATE()
 
         g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
 
         //g_Gyroscope.Update();
         //g_Motor.Update(g_Gyroscope.GetRawAngle());
-        UPDATE
+        UPDATE()
 
         while(Time > millis());
         Time = millis() + DELTA_TIME;
