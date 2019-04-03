@@ -30,16 +30,16 @@ class Temperature
         light.begin(16,2); //initialisation capteur colonne ligne 
         light.setRGB(R, G, B); //initialisation couleur
         m_EndDisplayTime = 0;
-        m_victim = 0;
+        m_victim = 0; //initialisation à 0
         m_TimeToUpdate = millis(); // force premier update
     }
 
-    float GetTemperature() const
+    float GetTemperature() const //retourne température
     {
         return m_fCurrentTemp;
     }
 
-    int GetVictim() const
+    int GetVictim() const //retourne état victime 0/1
     {
         return m_victim;
     }
