@@ -20,7 +20,7 @@ class Gyroscope
       return m_z;
     }
 
-    void setup()
+    void Setup()
     {
       myIMU.begin();
       
