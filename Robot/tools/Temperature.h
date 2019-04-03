@@ -3,7 +3,7 @@
 
 #include <math.h>
 #include "rgb_lcd.h"
-#define _ANALOG_THERMIC 14//à mettre l'adresse du capteur
+#define _ANALOG_THERMIC 14 
 #define _TEMP_UPDATE_DELTA_TIME_ 100 // ms
 
 class Temperature
