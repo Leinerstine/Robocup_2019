@@ -23,10 +23,9 @@ class Gyroscope
     void Setup()
     {
       myIMU.begin(); //nécessaire pour commencer
-      
     }
 
-    void    Update()
+    void Update()
     {
       unsigned long newTime = micros();
       float fDeltaTimeMicros = (newTime - m_time); //différence de temps
@@ -34,14 +33,13 @@ class Gyroscope
         return; // n update pas trop souvent
       m_time = newTime;
 
-      float fSpeedAngle = myIMU.readFloatGyroZ();
-      if (fabs(fSpeedAngle)<5.f)
+      float fSpeedAngle = myIMU.readFloatGyroZ(); //lit valeur angle Z 
+      if (fabs(fSpeedAngle)<5.f) //valeur absolue inférieure à 5° (manque de précision du capteur)
         fSpeedAngle = 0.f;
       
-      float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f);
+      float fDeltaAngle = (fSpeedAngle * fDeltaTimeMicros) * (1.f / 1000000.f); //angle*temps / 1 micros
       m_z = m_z + fDeltaAngle;
     }
-    
 };
 
 
