@@ -8,7 +8,7 @@ Gyroscope g_gyroscope; //je déclare mes variables liées aux .h
 bool g_bDebugMode = true;
 Robot_Move g_Motor; 
 bool  g_bStop = true; //au départ le robot est à l'arrêt
-Button g_MainButton(8); //le bouton pressoir est au port D2
+Button g_MainButton(8); //le bouton pressoir est au port D8
 Ultrason g_Ultrason;
 Temperature g_Temp;
 
@@ -31,9 +31,7 @@ void loop()
   g_Motor.Update(g_gyroscope.GetRawAngle());
   g_MainButton.Update(); 
   g_Ultrason.Update();
-  Serial.print(g_Ultrason.GetDistance());
   g_Temp.Update();
-  Serial.print(g_Temp.GetTemperature());
 
  if (g_bDebugMode)
  {
@@ -48,8 +46,8 @@ void loop()
     sprintf(txt1, "T %d",t);// D %d A %d", t, d, a);
     sprintf(txt2, " D %d",d);// D %d A %d", t, d, a);
     sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
-    strcat(txt1, txt2);
-    strcat(txt1, txt3);
+    strcat(txt1, txt2); //on met txt 2 dans txt1
+    strcat(txt1, txt3); //txt3 dans txt1
     g_Temp.DrawDebug(txt1);
  }
 

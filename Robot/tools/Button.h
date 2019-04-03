@@ -44,10 +44,9 @@ class Button
     {
       if (!m_bWasDownLastFrame) //s'il n'était pas appuyé avant
       {
-        m_DownStartTime = millis();
-        m_bIsPressedThisFrame = true; //maintenant appuyé
+        m_DownStartTime = millis(); //mtnt vient d'être appuyé 
+        m_bIsPressedThisFrame = true; 
       }
-      
       m_bWasDownLastFrame = true; //on modifie pour la prochaine boucle 
     }
     else
@@ -57,7 +56,6 @@ class Button
         m_bIsReleasedThisFrame = true; //maintenant relâché
         m_FullPressedTime = millis() - m_DownStartTime;
       }
-
        m_bWasDownLastFrame = false; 
     }
   }

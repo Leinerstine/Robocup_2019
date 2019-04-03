@@ -6,7 +6,7 @@
 class Ultrason 
 {
     long m_distance; //distance obtenue par le capteur 
-    unsigned long m_time; //temps depuis début programme
+    unsigned long m_time; //temps 
     Ultrasonic m_us; //variable créée via Ultrasonic.h 
 
     public:
