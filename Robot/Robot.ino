@@ -31,25 +31,10 @@ void loop()
   g_Motor.Update(g_gyroscope.GetRawAngle());
   g_MainButton.Update(); 
   g_Ultrason.Update();
-  //Serial.print(g_Ultrason.GetDistance());
+  Serial.print(g_Ultrason.GetDistance());
   g_Temp.Update();
-  //Serial.print(g_Temp.GetTemperature());
-  //Serial.println(g_MainButton.IsLongReleased());
+  Serial.print(g_Temp.GetTemperature());
 
-
-  // debug mode on off
- if (g_MainButton.IsLongReleased())
- {
-    if (g_bDebugMode)
-    {
-      g_bDebugMode = false;
-      g_Temp.StopDebug();
-    }
-    else
-    {
-      g_bDebugMode = true;
-    }
- }
  if (g_bDebugMode)
  {
     char txt1[256];
@@ -69,7 +54,7 @@ void loop()
  }
 
 
-  if (g_MainButton.IsShortReleased())
+  if (g_MainButton.IsReleased())
     g_bStop = !g_bStop;
 
   if(g_bStop)

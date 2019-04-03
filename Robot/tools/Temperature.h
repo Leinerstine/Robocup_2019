@@ -52,7 +52,7 @@ class Temperature
             m_fCurrentTemp = New_Temp;
         }
 
-        if (New_Temp - m_fMinTemp > 1.f) //difference température 1 degrés
+        if (New_Temp - m_fMinTemp > 2.f) //difference température 2 degrés
         {
            if (m_EndDisplayTime == 0) //pas d'affichage
            {
@@ -76,14 +76,6 @@ class Temperature
         if (New_Temp<m_fMinTemp && New_Temp!=0.f)
             m_fMinTemp = New_Temp;
         m_fCurrentTemp = New_Temp; //à la fin de chaque boucle : on modifie la valeur afin de pouvoir comparer avec la dernière valeur 
-    }
-
-    void    StopDebug()
-    {
-        if(m_EndDisplayTime != 0) //si on affiche
-            return;
-        light.clear(); //on clear le texte
-        light.setRGB(R,G,B); //on remet en rouge
     }
 
     void    DrawDebug(const char *_txt)

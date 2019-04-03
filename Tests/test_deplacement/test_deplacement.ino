@@ -39,19 +39,7 @@ void loop()
     g_MainButton.Update();
     g_Ultrason.Update();
     g_Temp.Update();
-
-  if (g_MainButton.IsLongReleased())
-  {
-      if (g_bDebugMode)
-      {
-        g_bDebugMode = false;
-        g_Temp.StopDebug();
-      }
-      else
-      {
-        g_bDebugMode = true;
-      }
-  }
+    
   if (g_bDebugMode)
   {
       char txt1[256];

@@ -27,15 +27,9 @@ class Button
   {
     return m_bIsPressedThisFrame;
   }
-  bool IsShortReleased() const //si c'est relâché renvoie que ça l'était
+  bool IsReleased() const //si c'est relâché renvoie que ça l'était
   {
     if (m_FullPressedTime < 500)
-      return m_bIsReleasedThisFrame;
-    return false;
-  }
-  bool IsLongReleased() const //si c'est relâché renvoie que ça l'était
-  {
-    if (m_FullPressedTime >= 500)
       return m_bIsReleasedThisFrame;
     return false;
   }
