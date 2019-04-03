@@ -67,7 +67,7 @@ class Temperature
                 m_EndDisplayTime = millis() + 5000; //temps actuel + 5 secondes (on coupe dans 5sec)
                 light.setRGB(R,255,B); //on change la couleur background
                 light.print("VICTIM FOUND");
-                m_victim = 0;
+                m_victim = 1;
            }
         }
  
