@@ -8,7 +8,7 @@
 #define UPDATE() g_Gyroscope.Update();\
                g_Motor.Update(g_Gyroscope.GetRawAngle());\
                g_MainButton.Update();\
-               ecran();
+               ecran();\
                if (g_MainButton.IsPressed()) {\
                    *PneedMove = 0;\
                    Serial.print("stop");\
@@ -208,6 +208,10 @@ void ecran()
     g_Temp.Update();
     g_Gyroscope.Update();
 
+    int isVictim = 0;
+    isVictim = g_Temp.GetVictim();
+    Serial.print(isVictim);
+
     char txt1[256];
     char txt2[256];
     char txt3[256];
@@ -220,5 +224,12 @@ void ecran()
     sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
     strcat(txt1, txt2);
     strcat(txt1, txt3);
-    g_Temp.DrawDebug(txt1);    
+    g_Temp.DrawDebug(txt1);
+
+    if (isVictim == 1) {
+        Serial.print("pause");
+        g_Motor.ChangeOrder(Robot_Move::STAY, 5000, 0);
+        while(Time > millis());
+        Time = millis() + DELTA_TIME;
+    }
 }
