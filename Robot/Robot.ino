@@ -42,7 +42,6 @@ void loop()
     long d = g_Ultrason.GetDistance();
     long a = g_gyroscope.GetRawAngle();
 
-    Serial.println(a);
     sprintf(txt1, "T %d",t);// D %d A %d", t, d, a);
     sprintf(txt2, " D %d",d);// D %d A %d", t, d, a);
     sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
