@@ -5,6 +5,16 @@
 #include "Button.h"
 #include "Temperature.h"
 
+#define UPDATE g_Gyroscope.Update();\
+               g_Motor.Update(g_Gyroscope.GetRawAngle());\
+               g_MainButton.Update();\
+               if (g_MainButton.IsShortReleased()) {\
+                   *PneedMove = 0;\
+                   Serial.print("stop");\
+                   return;\
+               }\
+                
+
 #define DELTA_TIME 5000
 
 void mfw_analyze(int *PneedMove);
@@ -66,7 +76,7 @@ void loop()
       sprintf(txt3, " A %d   ",a);// D %d A %d", t, d, a);
       strcat(txt1, txt2);
       strcat(txt1, txt3);
-     g_Temp.DrawDebug(txt1);
+      g_Temp.DrawDebug(txt1);
   }
 
 
@@ -94,32 +104,36 @@ void mfw_analyze(int *PneedMove)
     int r_distance, bw_distance, l_distance, fw_distance = 0; //variable stockant la distance entre le mur et le robot
     
     //AVANCE
-    g_Gyroscope.Update();
-    g_Motor.Update(g_Gyroscope.GetRawAngle());
+    //g_Gyroscope.Update();
+    //g_Motor.Update(g_Gyroscope.GetRawAngle());
+    UPDATE
     
     Time = millis() + DELTA_TIME;
     
     g_Motor.ChangeOrder(Robot_Move::FORWARD, 3000, 0); //avancer 3s
     Serial.print("avance\n");
 
-    g_Gyroscope.Update();
-    g_Motor.Update(g_Gyroscope.GetRawAngle());
-    
+    //g_Gyroscope.Update();
+    //g_Motor.Update(g_Gyroscope.GetRawAngle());
+    UPDATE
+
     while(Time > millis());
     Time = millis() + DELTA_TIME;
     
     //ANALYSE AUTOUR DE LUI
     for(i = 0; i<4; i++)
     {
-        g_Gyroscope.Update();
-        g_Motor.Update(g_Gyroscope.GetRawAngle());
-        
+        //g_Gyroscope.Update();
+        //g_Motor.Update(g_Gyroscope.GetRawAngle());
+        UPDATE
+
         g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
 
-        g_Gyroscope.Update();
-        g_Motor.Update(g_Gyroscope.GetRawAngle());
-        
+        //g_Gyroscope.Update();
+        //g_Motor.Update(g_Gyroscope.GetRawAngle());
+        UPDATE
+
         while(Time > millis());
         Time = millis() + DELTA_TIME;
         
@@ -158,30 +172,34 @@ void mfw_analyze(int *PneedMove)
     if (r_distance < 10) {
         if (fw_distance < 10) {
             if (l_distance < 10) {
-                g_Gyroscope.Update();
-                g_Motor.Update(g_Gyroscope.GetRawAngle());
-                
+                //g_Gyroscope.Update();
+                //g_Motor.Update(g_Gyroscope.GetRawAngle());
+                UPDATE
+
                 g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 180); //tourner 90°
                 Serial.print("demi-tour\n");
 
-                g_Gyroscope.Update();
-                g_Motor.Update(g_Gyroscope.GetRawAngle());
-                
+                //g_Gyroscope.Update();
+                //g_Motor.Update(g_Gyroscope.GetRawAngle());
+                UPDATE
+
                 while(Time > millis());
                 Time = millis() + DELTA_TIME;
                 
                 *PneedMove = 1;
             }
             else {
-                g_Gyroscope.Update();
-                g_Motor.Update(g_Gyroscope.GetRawAngle());
-                
+                //g_Gyroscope.Update();
+                //g_Motor.Update(g_Gyroscope.GetRawAngle());
+                UPDATE
+
                 g_Motor.ChangeOrder(Robot_Move::LEFT_ANGLE, 0, 90); //tourner 90°
                 Serial.print("gauche\n");
 
-                g_Gyroscope.Update();
-                g_Motor.Update(g_Gyroscope.GetRawAngle());
-                
+                //g_Gyroscope.Update();
+                //g_Motor.Update(g_Gyroscope.GetRawAngle());
+                UPDATE
+
                 while(Time > millis());
                 Time = millis() + DELTA_TIME;
                 
@@ -196,15 +214,17 @@ void mfw_analyze(int *PneedMove)
     }
     
     else {
-        g_Gyroscope.Update();
-        g_Motor.Update(g_Gyroscope.GetRawAngle());
-        
+        //g_Gyroscope.Update();
+        //g_Motor.Update(g_Gyroscope.GetRawAngle());
+        UPDATE
+
         g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
 
-        g_Gyroscope.Update();
-        g_Motor.Update(g_Gyroscope.GetRawAngle());
-        
+        //g_Gyroscope.Update();
+        //g_Motor.Update(g_Gyroscope.GetRawAngle());
+        UPDATE
+
         while(Time > millis());
         Time = millis() + DELTA_TIME;
         
