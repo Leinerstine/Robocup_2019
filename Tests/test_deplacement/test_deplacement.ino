@@ -8,11 +8,11 @@
 #define UPDATE() g_Gyroscope.Update();\
                g_Motor.Update(g_Gyroscope.GetRawAngle());\
                g_MainButton.Update();\
-               if (g_MainButton.IsShortReleased()) {\
+               if (g_MainButton.IsPressed()) {\
                    *PneedMove = 0;\
                    Serial.print("stop");\
                    return;\
-               }\
+               }
                 
 
 #define DELTA_TIME 5000
@@ -68,7 +68,7 @@ void loop()
   }
 
 
-    if (g_MainButton.IsShortReleased()) {
+    if (g_MainButton.IsPressed()) {
         g_bStop = !g_bStop;
     }
 

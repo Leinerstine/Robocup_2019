@@ -3,7 +3,7 @@
 
 #include <math.h>
 #include "rgb_lcd.h"
-#define _ANALOG_THERMIC 14//à mettre l'adresse du capteur
+#define _ANALOG_THERMIC 14 
 #define _TEMP_UPDATE_DELTA_TIME_ 100 // ms
 
 class Temperature
@@ -15,7 +15,7 @@ class Temperature
     const int G =   0;
     const int B =   0;
     long            m_EndDisplayTime; //temps où éteindre l'affichage
-    long            m_TimeToUpdate;
+    long            m_TimeToUpdate; 
 
     public:
     Temperature()
@@ -39,7 +39,7 @@ class Temperature
 
     void Update()
     {
-        if (m_TimeToUpdate >millis())
+        if (m_TimeToUpdate >millis()) //pas d'update  
             return;
         m_TimeToUpdate = millis() + _TEMP_UPDATE_DELTA_TIME_;
 
@@ -52,7 +52,7 @@ class Temperature
             m_fCurrentTemp = New_Temp;
         }
 
-        if (New_Temp - m_fMinTemp > 1.f) //difference température 5 degrés
+        if (New_Temp - m_fMinTemp > 2.f) //difference température 2 degrés
         {
            if (m_EndDisplayTime == 0) //pas d'affichage
            {
@@ -66,9 +66,9 @@ class Temperature
         
         if(m_EndDisplayTime != 0) //si on affiche
         {
-            if (m_EndDisplayTime < millis())
+            if (m_EndDisplayTime < millis()) //temps actuel > temps d'affichage
             {
-                light.clear();
+                light.clear(); //plus de texte
                 m_EndDisplayTime = 0;
             }
         }
@@ -78,15 +78,7 @@ class Temperature
         m_fCurrentTemp = New_Temp; //à la fin de chaque boucle : on modifie la valeur afin de pouvoir comparer avec la dernière valeur 
     }
 
-    void    StopDebug()
-    {
-        if(m_EndDisplayTime != 0) //si on affiche
-            return;
-        light.clear();
-        light.setRGB(R,G,B);
-    }
-
-    void    DrawDebug(const char *_txt)
+    void  DrawDebug(const char *_txt)
     {
         if(m_EndDisplayTime != 0) //si on affiche
            return;
