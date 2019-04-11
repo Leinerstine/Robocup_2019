@@ -5,7 +5,7 @@
 Gyroscope g_gyroscope;
 Robot_Move g_Motor; 
 bool  g_bStop = true;
-Button g_MainButton(2);
+Button g_MainButton(8);
 
 int g_IntCurrentOrder=0;
 
