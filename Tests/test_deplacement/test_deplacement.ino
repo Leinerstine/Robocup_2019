@@ -19,6 +19,7 @@
 #define DELTA_TIME 5000
 
 void mfw_analyze(int *PneedMove);
+void ecran();
 
 //initialise les differents elements
 Gyroscope g_Gyroscope;
@@ -136,7 +137,7 @@ void mfw_analyze(int *PneedMove)
                 Serial.print("\n");
                 break;
             case 2 :
-                l_distance = g_Ultrason.GetDistance();
+ç                l_distance = g_Ultrason.GetDistance();
                 Serial.print("obstacle a gauche a : ");
                 Serial.print(l_distance);
                 Serial.print("\n");
