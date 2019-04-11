@@ -137,7 +137,7 @@ void mfw_analyze(int *PneedMove)
                 Serial.print("\n");
                 break;
             case 2 :
-ç                l_distance = g_Ultrason.GetDistance();
+                l_distance = g_Ultrason.GetDistance();
                 Serial.print("obstacle a gauche a : ");
                 Serial.print(l_distance);
                 Serial.print("\n");
@@ -212,6 +212,7 @@ void ecran()
     int isVictim = 0;
     isVictim = g_Temp.GetVictim();
     Serial.print(isVictim);
+    Serial.print("\n");
 
     char txt1[256];
     char txt2[256];
