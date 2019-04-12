@@ -105,6 +105,14 @@ void mfw_analyze(int *PneedMove)
     UPDATE()
     Time = millis() + DELTA_TIME_AVANCER;
     while(Time > millis());
+
+    //ARRET
+    Time = millis() + DELTA_TIME_STAY;
+    while(Time > millis())
+    {
+      UPDATE()
+      g_Motor.ChangeOrder(Robot_Move::STAY, 2000, 0);
+    }
     
     //ANALYSE AUTOUR DE LUI
     for(i = 0; i<4; i++)
