@@ -19,6 +19,7 @@
 #define DELTA_TIME 5000
 
 void mfw_analyze(int *PneedMove);
+void ecran();
 
 //initialise les differents elements
 Gyroscope g_Gyroscope;
@@ -211,6 +212,7 @@ void ecran()
     int isVictim = 0;
     isVictim = g_Temp.GetVictim();
     Serial.print(isVictim);
+    Serial.print("\n");
 
     char txt1[256];
     char txt2[256];
