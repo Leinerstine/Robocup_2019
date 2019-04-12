@@ -1,4 +1,4 @@
-#include "Button.h"                                                                   
+#include "Button.h"                                                   
 #include "MoveMotor.h"
 #include "Gyroscope.h"
 #include "Ultrason.h"
@@ -10,15 +10,16 @@
                g_MainButton.Update();\
                ecran();\
                if (g_MainButton.IsPressed()) {\
-                   *PneedMove = 0;\
+                   *PneedMove = 1;\
+                   g_bStop = true;\
                    Serial.print("stop");\
                    return;\
                }
-                
 
-#define DELTA_TIME_AVANCER 5000
-#define DELTA_TIME_TOURNER 5000
-#define DELTA_TIME_STAY 5000
+
+#define DELTA_TIME_AVANCER 1300
+#define DELTA_TIME_TOURNER 2100
+#define DELTA_TIME_STAY 2000
 
 void mfw_analyze(int *PneedMove);
 void ecran();
@@ -33,7 +34,7 @@ Temperature g_Temp;
 //variable et pointeur stockant la demande de mouvement
 int needMove = 1;
 int *PneedMove = &needMove;
-bool g_bStop = true; //stock la demande d'arret 
+bool g_bStop = true; //stock la demande d'arret
 bool g_bDebugMode = true;
 long Time = 0;
 
@@ -98,30 +99,36 @@ void mfw_analyze(int *PneedMove)
     //AVANCE
     UPDATE()
     
-    Time = millis() + DELTA_TIME_AVANCER;
-    
     g_Motor.ChangeOrder(Robot_Move::FORWARD, 3000, 0); //avancer 3s
     Serial.print("avance\n");
 
     UPDATE()
-
-    while(Time > millis());
     Time = millis() + DELTA_TIME_AVANCER;
+    while(Time > millis());
     
     //ANALYSE AUTOUR DE LUI
     for(i = 0; i<4; i++)
     {
         UPDATE()
-
+        
         g_Motor.ChangeOrder(Robot_Move::RIGHT_ANGLE, 0, 90); //tourner 90°
         Serial.print("droite\n");
 
         UPDATE()
 
-        while(Time > millis());
         Time = millis() + DELTA_TIME_TOURNER;
-        
+        while(Time > millis());
+
+        //s'arrete
+        Serial.print("s'arrete et choisis\n");
+        Time = millis() + DELTA_TIME_STAY;
+        while(Time > millis())
+        {
+        UPDATE()
+        g_Motor.ChangeOrder(Robot_Move::STAY, 2000, 0);
         g_Ultrason.Update();
+        }
+        
         //analyse la distance 
         switch (i)
         {
@@ -151,6 +158,7 @@ void mfw_analyze(int *PneedMove)
                 break;
         }
     }
+    
 
     //CHOISIS LA FUTURE DIRECTION 
     if (r_distance < 10) {
@@ -164,9 +172,9 @@ void mfw_analyze(int *PneedMove)
 
                 UPDATE()
 
+                Time = millis() + DELTA_TIME_TOURNER*2;
                 while(Time > millis());
-                Time = millis() + 2*DELTA_TIME_TOURNER;
-                
+
                 *PneedMove = 1;
             }
             else {
@@ -177,8 +185,8 @@ void mfw_analyze(int *PneedMove)
 
                 UPDATE()
 
-                while(Time > millis());
                 Time = millis() + DELTA_TIME_TOURNER;
+                while(Time > millis());
                 
                 *PneedMove = 1;
             }
@@ -197,8 +205,8 @@ void mfw_analyze(int *PneedMove)
 
         UPDATE()
 
-        while(Time > millis());
         Time = millis() + DELTA_TIME_TOURNER;
+        while(Time > millis());
         
         *PneedMove = 1;
     }
@@ -212,8 +220,6 @@ void ecran()
 
     int isVictim = 0;
     isVictim = g_Temp.GetVictim();
-    Serial.print(isVictim);
-    Serial.print("\n");
 
     char txt1[256];
     char txt2[256];
@@ -230,9 +236,13 @@ void ecran()
     g_Temp.DrawDebug(txt1);
 
     if (isVictim == 1) {
-        Serial.print("pause");
-        g_Motor.ChangeOrder(Robot_Move::STAY, 5000, 0);
-        while(Time > millis());
+        Serial.print("victime trouvee\n");
+
+        g_Gyroscope.Update();
+        g_Motor.Update(g_Gyroscope.GetRawAngle());
+
         Time = millis() + DELTA_TIME_STAY;
+        g_Motor.ChangeOrder(Robot_Move::STAY, 0, 0);
+        while(Time > millis());
     }
 }
