@@ -14,8 +14,6 @@ class Robot_Move
         STAY,
         FORWARD,
         BACKWARD,
-        LEFT,
-        RIGHT,
         LEFT_ANGLE,
         RIGHT_ANGLE        
     };
@@ -32,7 +30,7 @@ class Robot_Move
     public:
     Robot_Move() //initialisation 
     {
-        m_CurrentOrder = STAY;
+        m_CurrentOrder = STAY; //actuellement en pause
         m_EndTimeOrder = 0xFFFFFFFF; //infini en hexadécimal 
         m_fFinalAngle = 0.f;
         m_fCurrentAngle = 0.f;
@@ -72,8 +70,7 @@ class Robot_Move
     }
     void    Update(float _currentAngle) //mise à jour angle actuel 
     {
-  
-       m_fCurrentAngle = _currentAngle;
+       m_fCurrentAngle = _currentAngle; //angle actuel 
         if (millis()>m_EndTimeOrder) //temps en millisecondes supérieur temps final exécution 
             ChangeOrder(STAY, 0, 0); //STOP
 
@@ -100,14 +97,12 @@ class Robot_Move
                 m_motor2.speed(MOTOR2, -vitesse);
                 break;
             case LEFT_ANGLE:  //si il faut tourner vers la gauche alors on continue sur case LEFT (absence de break)
-            case LEFT:
                 m_motor1.speed(MOTOR1, -vitesse);
                 m_motor1.speed(MOTOR2, -vitesse);
                 m_motor2.speed(MOTOR1, -vitesse);
                 m_motor2.speed(MOTOR2, -vitesse);
                 break;
-            case RIGHT_ANGLE: //idem tourner vers la droite   
-            case RIGHT:
+            case RIGHT_ANGLE: //idem tourner vers la droite
                 m_motor1.speed(MOTOR1, vitesse);
                 m_motor1.speed(MOTOR2, vitesse);
                 m_motor2.speed(MOTOR1, vitesse);
