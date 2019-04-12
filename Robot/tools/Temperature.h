@@ -59,7 +59,7 @@ class Temperature
             m_fCurrentTemp = New_Temp;
         }
 
-        if (New_Temp - m_fMinTemp > 2.f) //difference température 2 degrés
+        if (New_Temp - m_fMinTemp > 4.f) //difference température 2 degrés
         {
            if (m_EndDisplayTime == 0) //pas d'affichage
            {
